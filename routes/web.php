@@ -1,6 +1,6 @@
 <?php
 
-use App\Http\Controllers\Api\BannerController;
+
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -14,4 +14,4 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::post('/banner-page', [BannerController::class, 'BannerPage']);
+
