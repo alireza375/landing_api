@@ -2,37 +2,82 @@
 
 namespace App\Http\Controllers\Api;
 
-use Dotenv\Validator;
+use App\Http\Controllers\Controller;
 use App\Models\Banner;
 use Illuminate\Http\Request;
-use App\Http\Controllers\Controller;
 
 class BannerController extends Controller
 {
-    //
-    public function BannerPage(Request $request){
-
-        $validator = Validator::make($request->all(),[
-            'navber' => 'required',
+    //Store Banner
+    public function BannerStore(Request $request){
+        // return "Banner Create Successfully";
+        $request->validate([
+            // 'navber' => 'required',
             'logo' => 'required',
-            'heading_tag' => 'required',
-            'sort_description' => 'required',
-            'image' => 'required',
+            'head_tag' => 'required',
+            'sort_paragraph' => 'required',
+            'image' => 'required|image|mimes:jpeg,png,jpg,gif,svg|max:2048',
         ]);
-        if($validator->fails()){
-            $response = [
-                'success' => false,
-                'message' => $validator->errors()
-            ];
-            return response()->json($response, 400);
-        }
-        $input = $request->all();
-        $user = Banner::create($input);
 
+        $imageName = null;
+        if($request->hasFile("image")){
+            $image = $request->file("image");
+            $imageName = 'post_image_'.md5(('uniqid')). time() .".". $image->getClientOriginalExtension();
+            $image->move(public_path("images"), $imageName);
+           }
+
+        $logoName = null;
+        if($request->hasFile("logo")){
+            $logo = $request->file("logo");
+            $logoName = 'post_image_'.md5(('uniqid')). time() .".". $logo->getClientOriginalExtension();
+            $logo->move(public_path("logos"), $logoName);
+           }
+
+        $data = Banner::create([
+                "navber" => $request->navber,
+                "logo" => $logoName,
+                "head_tag"=> $request->head_tag,
+                "sort_paragraph"=> $request->sort_paragraph,
+                "image" => $imageName,
+            ]);
+           return response()->json([
+            'status' => 'success',
+            'message' => 'Banner Create Successfully',
+            'data' => $data,
+        ]);
+    }
+
+
+    // Update Banner
+    public function BannerUpdate(Request $request){
+        $banner = Banner::findorFail($request->id);
+        $banner->update($request->all());
+        // dd($banner);
         $response = [
             'success' => true,
-            'message' => 'Data Upload Successfuly'
+            'message' => 'Banner Update Successfuly'
+
         ];
+        return response()->json($response, 200);
+    }
+
+
+    // Banner Delete
+    public function DeleteBanner(Request $request){
+        $banner = Banner::findOrFail($request->id);
+
+        if($banner){
+            $banner->delete();
+            $response = [
+                'success' => true,
+                'message' => 'Banner Delete Successfuly'
+            ];
+        }else{
+            $response = [
+                'success' => false,
+                'message' => 'Banner Not Found'
+            ];
+        }
         return response()->json($response, 200);
     }
 
