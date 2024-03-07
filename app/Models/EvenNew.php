@@ -5,21 +5,14 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 
-class Banner extends Model
+class EvenNew extends Model
 {
     use HasFactory;
 
     protected $fillable = [
-        'navber',
-        'logo',
-        'head_tag',
-        'sort_paragraph',
         'image',
+        'date',
+        'title',
+        'description',
     ];
-
-    protected $casts = [
-        "image" =>"array",
-        "navber" =>"array"
-    ];
-
 }
