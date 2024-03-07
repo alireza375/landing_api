@@ -1,36 +1,54 @@
 <?php
 
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\BannerController;
-use App\Http\Controllers\Api\CourseController;
-use App\Http\Controllers\Api\GalaryController;
-use App\Http\Controllers\Api\NoticeController;
-use App\Http\Controllers\Api\EvenNewController;
+use App\Http\Controllers\CardController;
+use App\Http\Controllers\CourseController;
+use App\Http\Controllers\FacultiyContoller;
+use App\Http\Controllers\FooterController;
+use App\Http\Controllers\InspirationController;
+use Illuminate\Support\Facades\Route;
+
+/*
+|--------------------------------------------------------------------------
+| Web Routes
+|--------------------------------------------------------------------------
+|
+| Here is where you can register web routes for your application. These
+| routes are loaded by the RouteServiceProvider and all of them will
+| be assigned to the "web" middleware group. Make something great!
+|
+*/
+
+Route::post('/banner-page', [BannerController::class, 'BannerPage']);
+
+//inspiration page
+Route::post('/create-inspiration', [InspirationController::class, 'create']);
+Route::post('/update-inspiration/{id?}', [InspirationController::class, 'update']);
+Route::delete('/delete-inspiration/{id?}', [InspirationController::class, 'destroy']);
+Route::get('/index-inspiration', [InspirationController::class, 'index']);
+
+//card
+Route::post('/create-card', [CardController::class, 'create']);
+Route::post('/update-card/{id?}', [CardController::class, 'update']);
+Route::get('/index-card', [CardController::class, 'index']);
+Route::delete('/delete-card/{id?}', [CardController::class, 'destroy']);
+
+//course
+Route::get('/index-course', [CourseController::class, 'index']);
+Route::post('/create-course', [CourseController::class, 'create']);
+Route::post('/update-course/{id?}', [CourseController::class, 'update']);
+Route::delete('/delete-course/{id?}', [CourseController::class, 'destroy']);
+
+//Faculty
+Route::get('/index-faculty', [FacultiyContoller::class, 'index']);
+Route::post('/create-faculty', [FacultiyContoller::class, 'create']);
+Route::post('/update-faculty/{id}', [FacultiyContoller::class, 'update']);
+Route::delete('/delete-faculty/{id}', [FacultiyContoller::class, 'destroy']);
 
 
-// For Even News
-Route::get('/even-news-show', [EvenNewController::class, 'EvenIndex']);
-Route::post('/even-news-store', [EvenNewController::class, 'EvenStore']);
-Route::post('/even-news-update/{id?}', [EvenNewController::class, 'EvenUpdate']);
-Route::delete('/even-news-delete/{id?}', [EvenNewController::class, 'DeleteEven']);
-
-
-// For Notice
-Route::get('/notice-show', [NoticeController::class, 'NoticeIndex']);
-Route::post('/notice-store', [NoticeController::class, 'NoticeStore']);
-Route::post('/notice-update/{id?}', [NoticeController::class, 'NoticeUpdate']);
-Route::delete('/notice-delete/{id?}', [NoticeController::class, 'NoticeDelete']);
-
-// For Galary
-Route::get('/galary-show', [GalaryController::class, 'GalaryIndex']);
-Route::post('/galary-store',[GalaryController::class, 'GalaryStore']);
-Route::post('/galary-update/{id?}', [GalaryController::class, 'GalaryUpdate']);
-Route::delete('/galary-delete/{id?}', [GalaryController::class, 'GalaryDelete']);
-
-//For Banner
-Route::get('/banner-show', [BannerController::class, 'index']);
-Route::post('/banner-store', [BannerController::class, 'BannerStore']);
-Route::post('/banner-update/{id?}', [BannerController::class, 'BannerUpdate']);
-Route::delete('/banner-delete/{id?}', [BannerController::class, 'BannerDestroy']);
-
+//footer
+Route::get('/index-footer', [FooterController::class, 'index']);
+Route::post('/create-footer', [FooterController::class, 'create']);
+Route::post('/update-footer/{id}', [FooterController::class, 'update']);
+Route::delete('/delete-footer/{id}', [FooterController::class, 'destroy']);
 
