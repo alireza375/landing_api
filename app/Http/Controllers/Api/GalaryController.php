@@ -33,8 +33,7 @@ class GalaryController extends Controller
 
         return response()->json([
             'status' => 'success',
-            'message' => 'Galary Store successfully',
-            'data' => $data,
+            'message' => 'Galary Store successfully',$data
         ]);
         }
     }

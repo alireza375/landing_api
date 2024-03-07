@@ -16,4 +16,10 @@ class Banner extends Model
         'sort_paragraph',
         'image',
     ];
+
+    protected $casts = [
+        "image" =>"array",
+        "navber" =>"array"
+    ];
+
 }

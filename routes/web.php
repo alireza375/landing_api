@@ -2,26 +2,10 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Api\BannerController;
+use App\Http\Controllers\Api\CourseController;
 use App\Http\Controllers\Api\GalaryController;
 use App\Http\Controllers\Api\NoticeController;
 use App\Http\Controllers\Api\EvenNewController;
-
-
-/*
-|--------------------------------------------------------------------------
-| Web Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register web routes for your application. These
-| routes are loaded by the RouteServiceProvider and all of them will
-| be assigned to the "web" middleware group. Make something great!
-|
-*/
-//For Banner
-// Route::get('/banner-show', [BannerController::class, 'BannerIndex']);
-Route::post('/banner-store', [BannerController::class, 'BannerStore']);
-Route::post('/banner-update/{id?}', [BannerController::class, 'BannerUpdate']);
-Route::delete('/banner-delete/{id?}', [BannerController::class, 'BannerDelete']);
 
 
 // For Even News
@@ -42,3 +26,11 @@ Route::get('/galary-show', [GalaryController::class, 'GalaryIndex']);
 Route::post('/galary-store',[GalaryController::class, 'GalaryStore']);
 Route::post('/galary-update/{id?}', [GalaryController::class, 'GalaryUpdate']);
 Route::delete('/galary-delete/{id?}', [GalaryController::class, 'GalaryDelete']);
+
+//For Banner
+Route::get('/banner-show', [BannerController::class, 'index']);
+Route::post('/banner-store', [BannerController::class, 'BannerStore']);
+Route::post('/banner-update/{id?}', [BannerController::class, 'BannerUpdate']);
+Route::delete('/banner-delete/{id?}', [BannerController::class, 'BannerDestroy']);
+
+

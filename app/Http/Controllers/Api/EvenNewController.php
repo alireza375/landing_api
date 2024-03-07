@@ -38,8 +38,7 @@ class EvenNewController extends Controller
            ]);
            return response()->json([
             'status' => 'success',
-            'message' => 'News or Even Create Successfully',
-            'data' => $data,
+            'message' => 'News or Even Create Successfully', $data
         ]);
     }
 

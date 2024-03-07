@@ -17,7 +17,7 @@ return new class extends Migration
             $table->string('logo');
             $table->string('head_tag');
             $table->string('sort_paragraph');
-            $table->string('image');
+            $table->text('image');
             $table->timestamps();
         });
     }
